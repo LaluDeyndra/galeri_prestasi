@@ -6,133 +6,7 @@
     <title>Galeri Siswa Berprestasi</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" />
-    <style>
-      .card-hidden {
-        opacity: 0;
-        transform: translateY(20px);
-        transition: opacity 0.6s ease, transform 0.6s ease;
-      }
-      .card-visible {
-        opacity: 1;
-        transform: translateY(0);
-      }
-      /* Smooth hover transitions untuk semua elemen */
-      .smooth-hover {
-        transition: all 0.3s ease;
-      }
-      /* Loading screen styles */
-      #loading-screen {
-        position: fixed;
-        top: 0;
-        left: 0;
-        width: 100%;
-        height: 100%;
-        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        z-index: 9999;
-        transition: opacity 0.5s ease, visibility 0.5s ease;
-      }
-      #loading-screen.hidden {
-        opacity: 0;
-        visibility: hidden;
-      }
-      .spinner {
-        width: 60px;
-        height: 60px;
-        border: 5px solid rgba(255, 255, 255, 0.3);
-        border-top: 5px solid #fff;
-        border-radius: 50%;
-        animation: spin 1s linear infinite;
-      }
-      @keyframes spin {
-        0% {
-          transform: rotate(0deg);
-        }
-        100% {
-          transform: rotate(360deg);
-        }
-      }
-      /* Tombol Lihat Lebih Banyak */
-      #load-more-btn {
-        transition: all 0.3s ease;
-      }
-      .hidden-card {
-        display: none;
-      }
-
-      /* Animasi untuk elemen saat scroll */
-      .scroll-animate {
-        opacity: 0;
-        transform: translateY(30px);
-        transition: all 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94);
-      }
-
-      .scroll-animate-left {
-        opacity: 0;
-        transform: translateX(-30px);
-        transition: all 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94);
-      }
-
-      .scroll-animate-right {
-        opacity: 0;
-        transform: translateX(30px);
-        transition: all 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94);
-      }
-
-      .scroll-animate-zoom {
-        opacity: 0;
-        transform: scale(0.9);
-        transition: all 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94);
-      }
-
-      .scroll-visible {
-        opacity: 1;
-        transform: translateY(0) translateX(0) scale(1);
-      }
-
-      /* Stagger delay untuk animasi bertahap */
-      .delay-100 {
-        transition-delay: 100ms;
-      }
-      .delay-200 {
-        transition-delay: 200ms;
-      }
-      .delay-300 {
-        transition-delay: 300ms;
-      }
-      .delay-400 {
-        transition-delay: 400ms;
-      }
-      .delay-500 {
-        transition-delay: 500ms;
-      }
-
-      /* Animasi untuk judul halaman */
-      .title-animate {
-        opacity: 0;
-        transform: translateY(-20px) scale(0.95);
-        transition: all 0.8s ease-out;
-      }
-
-      .title-visible {
-        opacity: 1;
-        transform: translateY(0) scale(1);
-      }
-
-      /* Animasi untuk tombol lihat lebih banyak */
-      .button-animate {
-        opacity: 0;
-        transform: translateY(20px);
-        transition: all 0.6s ease-out;
-      }
-
-      .button-visible {
-        opacity: 1;
-        transform: translateY(0);
-      }
-    </style>
+    <link rel="stylesheet" href="style.css" />
   </head>
   <body class="bg-gradient-to-br from-blue-100 via-purple-100 to-pink-100 font-sans min-h-screen">
     <!-- Loading Screen -->
@@ -145,7 +19,38 @@
     </div>
 
     <div class="container mx-auto px-4 py-8">
-      <h1 class="text-3xl font-bold text-center text-gray-800 mb-8 smooth-hover hover:text-blue-600 hover:scale-105 title-animate">Galeri Siswa Berprestasi</h1>
+      <div class="flex items-center justify-between mb-8">
+        <h1 class="text-3xl font-bold text-center flex-1 text-gray-800 smooth-hover hover:text-blue-600 hover:scale-105 title-animate">Galeri Siswa Berprestasi</h1>
+      </div>
+
+      <!-- Theme Toggle Button -->
+      <button class="theme-toggle" id="theme-toggle" aria-label="Toggle theme">
+        <i class="fas fa-sun"></i>
+      </button>
+
+      <!-- Trophy Toggle Button (left of theme toggle) -->
+      <button class="trophy-toggle" id="trophy-toggle" aria-label="Show trophies">
+        <i class="fas fa-trophy" aria-hidden="true"></i>
+      </button>
+
+      <!-- Trophy animation container -->
+      <div id="trophy-container" aria-hidden="true"></div>
+
+      <!-- Popup Ucapan Selamat -->
+      <div id="congrats-popup" class="fixed inset-0 items-center justify-center bg-black bg-opacity-60 z-50 hidden">
+        <div class="bg-white rounded-2xl shadow-2xl p-8 text-center relative popup-card popup-enter">
+          <span class="absolute top-2 right-4 text-3xl cursor-pointer text-gray-400 hover:text-red-500 close-x" id="close-popup">&times;</span>
+          <h2 class="text-3xl font-bold text-yellow-500 mb-4"><i class="fas fa-trophy"></i> Selamat!</h2>
+          <p class="text-lg text-gray-700 mb-2">Untuk semua siswa berprestasi di website ini, kalian luar biasa!</p>
+          <p class="text-md text-blue-600 mb-4">Teruslah berjuang, berkarya, dan menginspirasi Indonesia! Prestasi kalian adalah kebanggaan sekolah dan bangsa!</p>
+          <div class="flex flex-col items-center">
+            <div class="text-6xl mb-2 trophy-big" aria-hidden="true"><i class="fas fa-trophy"></i></div>
+            <div id="popup-badges" class="flex flex-wrap justify-center gap-3" aria-hidden="false"></div>
+          </div>
+          <div id="fireworks" class="w-full h-28 flex justify-center items-end relative mt-4"></div>
+        </div>
+      </div>
+
       <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6" id="card-container">
         <!-- Kartu Siswa 1 -->
         <div class="bg-white rounded-lg shadow-md overflow-hidden hover:shadow-xl hover:scale-105 border border-gray-200 card-hidden smooth-hover scroll-animate-left delay-100">
@@ -227,7 +132,7 @@
         </div>
         <!-- Kartu Siswa 7 (tersembunyi) -->
         <div class="bg-white rounded-lg shadow-md overflow-hidden hover:shadow-xl hover:scale-105 border border-gray-200 card-hidden smooth-hover hidden-card scroll-animate-left">
-          <img src="https://picsum.photos/400/300?random=7" alt="Siswa Berprestasi 7" class="w-full h-48 object-cover smooth-hover hover:brightness-110 hover:scale-110" />
+          <img data-src="https://picsum.photos/400/300?random=7" alt="Siswa Berprestasi 7" class="w-full h-48 object-cover smooth-hover hover:brightness-110 hover:scale-110" />
           <div class="p-4">
             <h2 class="text-xl font-semibold text-gray-800 smooth-hover hover:text-blue-600">Dewi Anggraini</h2>
             <p class="text-gray-600 mt-2 smooth-hover hover:text-gray-800">Juara 1 Lomba Robotik Nasional 2023. Prestasi: Robot dengan AI Terbaik.</p>
@@ -240,7 +145,7 @@
         </div>
         <!-- Kartu Siswa 8 (tersembunyi) -->
         <div class="bg-white rounded-lg shadow-md overflow-hidden hover:shadow-xl hover:scale-105 border border-gray-200 card-hidden smooth-hover hidden-card scroll-animate-right">
-          <img src="https://picsum.photos/400/300?random=8" alt="Siswa Berprestasi 8" class="w-full h-48 object-cover smooth-hover hover:brightness-110 hover:scale-110" />
+          <img data-src="https://picsum.photos/400/300?random=8" alt="Siswa Berprestasi 8" class="w-full h-48 object-cover smooth-hover hover:brightness-110 hover:scale-110" />
           <div class="p-4">
             <h2 class="text-xl font-semibold text-gray-800 smooth-hover hover:text-blue-600">Fajar Nugroho</h2>
             <p class="text-gray-600 mt-2 smooth-hover hover:text-gray-800">Pemenang Lomba Coding Competition 2023. Prestasi: Aplikasi Edukasi Terbaik.</p>
@@ -256,153 +161,30 @@
       <!-- Tombol Lihat Lebih Banyak -->
       <div id="load-more-container" class="text-center mt-8 hidden button-animate">
         <button id="load-more-btn" class="bg-blue-500 hover:bg-blue-600 text-white font-bold py-3 px-6 rounded-full shadow-md smooth-hover hover:scale-105 transition-all duration-300">
-          <i class="fas fa-plus-circle mr-2"></i>Lihat Lebih Banyak
+          <span id="btn-spinner" class="btn-spinner hidden" aria-hidden="true"></span>
+          <i class="fas fa-plus-circle mr-2" id="btn-icon"></i>
+          <span id="btn-text">Lihat Lebih Banyak</span>
         </button>
       </div>
     </div>
 
-    <script>
-      // Preload gambar: Tunggu semua gambar ter-load sebelum sembunyikan loading screen
-      const images = document.querySelectorAll('img');
-      let loadedImages = 0;
-      const totalImages = images.length;
+    <script src="script.js"></script>
+    <!-- Footer -->
+    <footer class="site-footer mt-12">
+      <div class="container mx-auto px-4 py-6 flex items-center justify-between">
+        <div class="flex items-center space-x-4">
+          <a href="https://www.youtube.com/@apeoplewhohaveacoolname" target="_blank" rel="noopener" aria-label="YouTube" class="text-red-700 footer-icon flex items-center space-x-2">
+            <i class="fab fa-youtube text-2xl"></i>
+            <span class="text-sm font-medium">YouTube</span>
+          </a>
+          <a href="https://github.com/LaluDeyndra/galeri_prestasi" target="_blank" rel="noopener" aria-label="GitHub" class="text-gray-700 footer-icon flex items-center space-x-2">
+            <i class="fab fa-github text-2xl"></i>
+            <span class="text-sm font-medium">GitHub</span>
+          </a>
+        </div>
 
-      function imageLoaded() {
-        loadedImages++;
-        if (loadedImages === totalImages) {
-          setTimeout(() => {
-            document.getElementById('loading-screen').classList.add('hidden');
-            initLoadMore(); // Inisialisasi tombol lihat lebih banyak setelah loading selesai
-            initScrollAnimations(); // Inisialisasi animasi scroll
-          }, 500); // Delay kecil untuk efek smooth
-        }
-      }
-
-      images.forEach((img) => {
-        if (img.complete) {
-          imageLoaded();
-        } else {
-          img.addEventListener('load', imageLoaded);
-          img.addEventListener('error', imageLoaded); // Jika error, tetap hitung sebagai loaded
-        }
-      });
-
-      // Animasi scroll: Kartu muncul dengan fade-in dan slide-up saat masuk viewport
-      const observer = new IntersectionObserver(
-        (entries) => {
-          entries.forEach((entry) => {
-            if (entry.isIntersecting) {
-              entry.target.classList.add('card-visible');
-            }
-          });
-        },
-        { threshold: 0.1 }
-      );
-
-      // Ambil semua kartu dan observasi
-      const cards = document.querySelectorAll('.card-hidden');
-      cards.forEach((card) => observer.observe(card));
-
-      // Fungsi untuk mengelola tombol "Lihat Lebih Banyak"
-      function initLoadMore() {
-        const cardContainer = document.getElementById('card-container');
-        const cards = cardContainer.querySelectorAll('.bg-white');
-        const loadMoreContainer = document.getElementById('load-more-container');
-        const loadMoreBtn = document.getElementById('load-more-btn');
-
-        // Tampilkan hanya 6 kartu pertama
-        const totalCards = cards.length;
-        const cardsToShow = 6;
-        let currentlyShowing = cardsToShow;
-
-        if (totalCards > cardsToShow) {
-          // Sembunyikan kartu yang lebih dari 6
-          for (let i = cardsToShow; i < totalCards; i++) {
-            cards[i].classList.add('hidden-card');
-          }
-
-          // Tampilkan tombol lihat lebih banyak
-          loadMoreContainer.classList.remove('hidden');
-
-          // Tambahkan animasi untuk tombol
-          setTimeout(() => {
-            loadMoreContainer.classList.add('button-visible');
-          }, 300);
-
-          // Event listener untuk tombol lihat lebih banyak
-          loadMoreBtn.addEventListener('click', function () {
-            // Tampilkan 3 kartu berikutnya
-            for (let i = currentlyShowing; i < currentlyShowing + 3 && i < totalCards; i++) {
-              cards[i].classList.remove('hidden-card');
-              // Trigger animasi untuk kartu yang baru ditampilkan
-              setTimeout(() => {
-                cards[i].classList.add('card-visible');
-                cards[i].classList.add('scroll-visible');
-              }, 100);
-            }
-
-            currentlyShowing += 3;
-
-            // Sembunyikan tombol jika semua kartu sudah ditampilkan
-            if (currentlyShowing >= totalCards) {
-              loadMoreContainer.classList.add('hidden');
-            }
-          });
-        }
-      }
-
-      // Fungsi untuk inisialisasi animasi scroll
-      function initScrollAnimations() {
-        // Animasi untuk judul halaman
-        const title = document.querySelector('.title-animate');
-        if (title) {
-          setTimeout(() => {
-            title.classList.add('title-visible');
-          }, 300);
-        }
-
-        // Observer untuk elemen dengan animasi scroll
-        const scrollObserver = new IntersectionObserver(
-          (entries) => {
-            entries.forEach((entry) => {
-              if (entry.isIntersecting) {
-                entry.target.classList.add('scroll-visible');
-              } else {
-                // Opsional: Hapus animasi saat elemen keluar dari viewport
-                // entry.target.classList.remove('scroll-visible');
-              }
-            });
-          },
-          {
-            threshold: 0.1,
-            rootMargin: '0px 0px -50px 0px',
-          }
-        );
-
-        // Observasi semua elemen dengan kelas animasi scroll
-        const scrollElements = document.querySelectorAll('.scroll-animate, .scroll-animate-left, .scroll-animate-right, .scroll-animate-zoom');
-        scrollElements.forEach((el) => {
-          scrollObserver.observe(el);
-        });
-
-        // Tambahkan efek parallax sederhana pada kartu saat scroll
-        window.addEventListener('scroll', () => {
-          const scrolled = window.pageYOffset;
-          const parallaxElements = document.querySelectorAll('.bg-white');
-
-          parallaxElements.forEach((el, index) => {
-            const rate = scrolled * -0.1;
-            // Berikan efek yang berbeda berdasarkan posisi kartu
-            if (index % 3 === 0) {
-              el.style.transform = `translateY(${rate}px)`;
-            } else if (index % 3 === 1) {
-              el.style.transform = `translateY(${rate * 0.7}px)`;
-            } else {
-              el.style.transform = `translateY(${rate * 0.4}px)`;
-            }
-          });
-        });
-      }
-    </script>
+        <div class="text-sm text-gray-600">Dibuat Oleh <a href="#" id="creator-link" class="text-blue-600 hover:underline">GoeksTeam</a></div>
+      </div>
+    </footer>
   </body>
 </html>
