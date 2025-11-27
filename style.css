@@ -681,4 +681,14 @@ body.dark-mode #congrats-popup .text-blue-600 {
   #fireworks {
     height: 80px;
   }
+
+  /* Footer: show only icons on very small screens */
+  .site-footer .container a span {
+    display: none !important;
+  }
+
+  /* Reduce spacing between footer icons when labels hidden */
+  .site-footer .container .flex.items-center.space-x-4 {
+    gap: 8px;
+  }
 }
