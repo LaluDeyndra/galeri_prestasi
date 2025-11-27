@@ -1,0 +1,408 @@
+<!DOCTYPE html>
+<html lang="id">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Galeri Siswa Berprestasi</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" />
+    <style>
+      .card-hidden {
+        opacity: 0;
+        transform: translateY(20px);
+        transition: opacity 0.6s ease, transform 0.6s ease;
+      }
+      .card-visible {
+        opacity: 1;
+        transform: translateY(0);
+      }
+      /* Smooth hover transitions untuk semua elemen */
+      .smooth-hover {
+        transition: all 0.3s ease;
+      }
+      /* Loading screen styles */
+      #loading-screen {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        z-index: 9999;
+        transition: opacity 0.5s ease, visibility 0.5s ease;
+      }
+      #loading-screen.hidden {
+        opacity: 0;
+        visibility: hidden;
+      }
+      .spinner {
+        width: 60px;
+        height: 60px;
+        border: 5px solid rgba(255, 255, 255, 0.3);
+        border-top: 5px solid #fff;
+        border-radius: 50%;
+        animation: spin 1s linear infinite;
+      }
+      @keyframes spin {
+        0% {
+          transform: rotate(0deg);
+        }
+        100% {
+          transform: rotate(360deg);
+        }
+      }
+      /* Tombol Lihat Lebih Banyak */
+      #load-more-btn {
+        transition: all 0.3s ease;
+      }
+      .hidden-card {
+        display: none;
+      }
+
+      /* Animasi untuk elemen saat scroll */
+      .scroll-animate {
+        opacity: 0;
+        transform: translateY(30px);
+        transition: all 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+      }
+
+      .scroll-animate-left {
+        opacity: 0;
+        transform: translateX(-30px);
+        transition: all 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+      }
+
+      .scroll-animate-right {
+        opacity: 0;
+        transform: translateX(30px);
+        transition: all 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+      }
+
+      .scroll-animate-zoom {
+        opacity: 0;
+        transform: scale(0.9);
+        transition: all 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+      }
+
+      .scroll-visible {
+        opacity: 1;
+        transform: translateY(0) translateX(0) scale(1);
+      }
+
+      /* Stagger delay untuk animasi bertahap */
+      .delay-100 {
+        transition-delay: 100ms;
+      }
+      .delay-200 {
+        transition-delay: 200ms;
+      }
+      .delay-300 {
+        transition-delay: 300ms;
+      }
+      .delay-400 {
+        transition-delay: 400ms;
+      }
+      .delay-500 {
+        transition-delay: 500ms;
+      }
+
+      /* Animasi untuk judul halaman */
+      .title-animate {
+        opacity: 0;
+        transform: translateY(-20px) scale(0.95);
+        transition: all 0.8s ease-out;
+      }
+
+      .title-visible {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+      }
+
+      /* Animasi untuk tombol lihat lebih banyak */
+      .button-animate {
+        opacity: 0;
+        transform: translateY(20px);
+        transition: all 0.6s ease-out;
+      }
+
+      .button-visible {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    </style>
+  </head>
+  <body class="bg-gradient-to-br from-blue-100 via-purple-100 to-pink-100 font-sans min-h-screen">
+    <!-- Loading Screen -->
+    <div id="loading-screen">
+      <div class="text-center text-white">
+        <div class="spinner mx-auto mb-4"></div>
+        <h2 class="text-2xl font-bold mb-2">Memuat Galeri Siswa Berprestasi</h2>
+        <p class="text-lg">Menampilkan prestasi dan inspirasi siswa...</p>
+      </div>
+    </div>
+
+    <div class="container mx-auto px-4 py-8">
+      <h1 class="text-3xl font-bold text-center text-gray-800 mb-8 smooth-hover hover:text-blue-600 hover:scale-105 title-animate">Galeri Siswa Berprestasi</h1>
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6" id="card-container">
+        <!-- Kartu Siswa 1 -->
+        <div class="bg-white rounded-lg shadow-md overflow-hidden hover:shadow-xl hover:scale-105 border border-gray-200 card-hidden smooth-hover scroll-animate-left delay-100">
+          <img src="https://picsum.photos/400/300?random=1" alt="Siswa Berprestasi 1" class="w-full h-48 object-cover smooth-hover hover:brightness-110 hover:scale-110" />
+          <div class="p-4">
+            <h2 class="text-xl font-semibold text-gray-800 smooth-hover hover:text-blue-600">Ahmad Rahman</h2>
+            <p class="text-gray-600 mt-2 smooth-hover hover:text-gray-800">Juara 1 Olimpiade Matematika Nasional 2023. Prestasi: Medali Emas dan Beasiswa Penuh.</p>
+            <div class="flex justify-center space-x-4 mt-4">
+              <a href="https://instagram.com/ahmadrahman" target="_blank" class="text-pink-500 smooth-hover hover:text-pink-700 hover:scale-110"><i class="fab fa-instagram text-2xl"></i></a>
+              <a href="https://tiktok.com/@ahmadrahman" target="_blank" class="text-black smooth-hover hover:text-gray-700 hover:scale-110"><i class="fab fa-tiktok text-2xl"></i></a>
+            </div>
+            <p class="text-center text-sm text-gray-500 mt-2">Ikuti akun media sosial siswa ini</p>
+          </div>
+        </div>
+        <!-- Kartu Siswa 2 -->
+        <div class="bg-white rounded-lg shadow-md overflow-hidden hover:shadow-xl hover:scale-105 border border-gray-200 card-hidden smooth-hover scroll-animate delay-200">
+          <img src="https://picsum.photos/400/300?random=2" alt="Siswa Berprestasi 2" class="w-full h-48 object-cover smooth-hover hover:brightness-110 hover:scale-110" />
+          <div class="p-4">
+            <h2 class="text-xl font-semibold text-gray-800 smooth-hover hover:text-blue-600">Siti Nurhaliza</h2>
+            <p class="text-gray-600 mt-2 smooth-hover hover:text-gray-800">Pemenang Lomba Karya Ilmiah Remaja 2023. Prestasi: Inovasi Teknologi Ramah Lingkungan.</p>
+            <div class="flex justify-center space-x-4 mt-4">
+              <a href="https://instagram.com/sitinurhaliza" target="_blank" class="text-pink-500 smooth-hover hover:text-pink-700 hover:scale-110"><i class="fab fa-instagram text-2xl"></i></a>
+              <a href="https://tiktok.com/@sitinurhaliza" target="_blank" class="text-black smooth-hover hover:text-gray-700 hover:scale-110"><i class="fab fa-tiktok text-2xl"></i></a>
+            </div>
+            <p class="text-center text-sm text-gray-500 mt-2">Ikuti akun media sosial siswa ini</p>
+          </div>
+        </div>
+        <!-- Kartu Siswa 3 -->
+        <div class="bg-white rounded-lg shadow-md overflow-hidden hover:shadow-xl hover:scale-105 border border-gray-200 card-hidden smooth-hover scroll-animate-right delay-300">
+          <img src="https://picsum.photos/400/300?random=3" alt="Siswa Berprestasi 3" class="w-full h-48 object-cover smooth-hover hover:brightness-110 hover:scale-110" />
+          <div class="p-4">
+            <h2 class="text-xl font-semibold text-gray-800 smooth-hover hover:text-blue-600">Budi Santoso</h2>
+            <p class="text-gray-600 mt-2 smooth-hover hover:text-gray-800">Atlet Terbaik dalam Kejuaraan Olahraga Sekolah 2023. Prestasi: Rekor Waktu Lari 100m.</p>
+            <div class="flex justify-center space-x-4 mt-4">
+              <a href="https://instagram.com/budisantoso" target="_blank" class="text-pink-500 smooth-hover hover:text-pink-700 hover:scale-110"><i class="fab fa-instagram text-2xl"></i></a>
+              <a href="https://tiktok.com/@budisantoso" target="_blank" class="text-black smooth-hover hover:text-gray-700 hover:scale-110"><i class="fab fa-tiktok text-2xl"></i></a>
+            </div>
+            <p class="text-center text-sm text-gray-500 mt-2">Ikuti akun media sosial siswa ini</p>
+          </div>
+        </div>
+        <!-- Kartu Siswa 4 -->
+        <div class="bg-white rounded-lg shadow-md overflow-hidden hover:shadow-xl hover:scale-105 border border-gray-200 card-hidden smooth-hover scroll-animate-left delay-400">
+          <img src="https://picsum.photos/400/300?random=4" alt="Siswa Berprestasi 4" class="w-full h-48 object-cover smooth-hover hover:brightness-110 hover:scale-110" />
+          <div class="p-4">
+            <h2 class="text-xl font-semibold text-gray-800 smooth-hover hover:text-blue-600">Maya Sari</h2>
+            <p class="text-gray-600 mt-2 smooth-hover hover:text-gray-800">Pemenang Kompetisi Seni Lukis Nasional 2023. Prestasi: Karya Terpilih untuk Pameran Internasional.</p>
+            <div class="flex justify-center space-x-4 mt-4">
+              <a href="https://instagram.com/mayasari" target="_blank" class="text-pink-500 smooth-hover hover:text-pink-700 hover:scale-110"><i class="fab fa-instagram text-2xl"></i></a>
+              <a href="https://tiktok.com/@mayasari" target="_blank" class="text-black smooth-hover hover:text-gray-700 hover:scale-110"><i class="fab fa-tiktok text-2xl"></i></a>
+            </div>
+            <p class="text-center text-sm text-gray-500 mt-2">Ikuti akun media sosial siswa ini</p>
+          </div>
+        </div>
+        <!-- Kartu Siswa 5 -->
+        <div class="bg-white rounded-lg shadow-md overflow-hidden hover:shadow-xl hover:scale-105 border border-gray-200 card-hidden smooth-hover scroll-animate-zoom delay-500">
+          <img src="https://picsum.photos/400/300?random=5" alt="Siswa Berprestasi 5" class="w-full h-48 object-cover smooth-hover hover:brightness-110 hover:scale-110" />
+          <div class="p-4">
+            <h2 class="text-xl font-semibold text-gray-800 smooth-hover hover:text-blue-600">Rizky Pratama</h2>
+            <p class="text-gray-600 mt-2 smooth-hover hover:text-gray-800">Juara 2 Lomba Debat Bahasa Inggris 2023. Prestasi: Kemampuan Komunikasi dan Argumentasi Unggul.</p>
+            <div class="flex justify-center space-x-4 mt-4">
+              <a href="https://instagram.com/rizkypratama" target="_blank" class="text-pink-500 smooth-hover hover:text-pink-700 hover:scale-110"><i class="fab fa-instagram text-2xl"></i></a>
+              <a href="https://tiktok.com/@rizkypratama" target="_blank" class="text-black smooth-hover hover:text-gray-700 hover:scale-110"><i class="fab fa-tiktok text-2xl"></i></a>
+            </div>
+            <p class="text-center text-sm text-gray-500 mt-2">Ikuti akun media sosial siswa ini</p>
+          </div>
+        </div>
+        <!-- Kartu Siswa 6 -->
+        <div class="bg-white rounded-lg shadow-md overflow-hidden hover:shadow-xl hover:scale-105 border border-gray-200 card-hidden smooth-hover scroll-animate delay-100">
+          <img src="https://picsum.photos/400/300?random=6" alt="Siswa Berprestasi 6" class="w-full h-48 object-cover smooth-hover hover:brightness-110 hover:scale-110" />
+          <div class="p-4">
+            <h2 class="text-xl font-semibold text-gray-800 smooth-hover hover:text-blue-600">Lina Kusuma</h2>
+            <p class="text-gray-600 mt-2 smooth-hover hover:text-gray-800">Pemenang Lomba Puisi Remaja 2023. Prestasi: Karya Puisi yang Menginspirasi Generasi Muda.</p>
+            <div class="flex justify-center space-x-4 mt-4">
+              <a href="https://instagram.com/linakusuma" target="_blank" class="text-pink-500 smooth-hover hover:text-pink-700 hover:scale-110"><i class="fab fa-instagram text-2xl"></i></a>
+              <a href="https://tiktok.com/@linakusuma" target="_blank" class="text-black smooth-hover hover:text-gray-700 hover:scale-110"><i class="fab fa-tiktok text-2xl"></i></a>
+            </div>
+            <p class="text-center text-sm text-gray-500 mt-2">Ikuti akun media sosial siswa ini</p>
+          </div>
+        </div>
+        <!-- Kartu Siswa 7 (tersembunyi) -->
+        <div class="bg-white rounded-lg shadow-md overflow-hidden hover:shadow-xl hover:scale-105 border border-gray-200 card-hidden smooth-hover hidden-card scroll-animate-left">
+          <img src="https://picsum.photos/400/300?random=7" alt="Siswa Berprestasi 7" class="w-full h-48 object-cover smooth-hover hover:brightness-110 hover:scale-110" />
+          <div class="p-4">
+            <h2 class="text-xl font-semibold text-gray-800 smooth-hover hover:text-blue-600">Dewi Anggraini</h2>
+            <p class="text-gray-600 mt-2 smooth-hover hover:text-gray-800">Juara 1 Lomba Robotik Nasional 2023. Prestasi: Robot dengan AI Terbaik.</p>
+            <div class="flex justify-center space-x-4 mt-4">
+              <a href="https://instagram.com/dewianggraini" target="_blank" class="text-pink-500 smooth-hover hover:text-pink-700 hover:scale-110"><i class="fab fa-instagram text-2xl"></i></a>
+              <a href="https://tiktok.com/@dewianggraini" target="_blank" class="text-black smooth-hover hover:text-gray-700 hover:scale-110"><i class="fab fa-tiktok text-2xl"></i></a>
+            </div>
+            <p class="text-center text-sm text-gray-500 mt-2">Ikuti akun media sosial siswa ini</p>
+          </div>
+        </div>
+        <!-- Kartu Siswa 8 (tersembunyi) -->
+        <div class="bg-white rounded-lg shadow-md overflow-hidden hover:shadow-xl hover:scale-105 border border-gray-200 card-hidden smooth-hover hidden-card scroll-animate-right">
+          <img src="https://picsum.photos/400/300?random=8" alt="Siswa Berprestasi 8" class="w-full h-48 object-cover smooth-hover hover:brightness-110 hover:scale-110" />
+          <div class="p-4">
+            <h2 class="text-xl font-semibold text-gray-800 smooth-hover hover:text-blue-600">Fajar Nugroho</h2>
+            <p class="text-gray-600 mt-2 smooth-hover hover:text-gray-800">Pemenang Lomba Coding Competition 2023. Prestasi: Aplikasi Edukasi Terbaik.</p>
+            <div class="flex justify-center space-x-4 mt-4">
+              <a href="https://instagram.com/fajarnugroho" target="_blank" class="text-pink-500 smooth-hover hover:text-pink-700 hover:scale-110"><i class="fab fa-instagram text-2xl"></i></a>
+              <a href="https://tiktok.com/@fajarnugroho" target="_blank" class="text-black smooth-hover hover:text-gray-700 hover:scale-110"><i class="fab fa-tiktok text-2xl"></i></a>
+            </div>
+            <p class="text-center text-sm text-gray-500 mt-2">Ikuti akun media sosial siswa ini</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Tombol Lihat Lebih Banyak -->
+      <div id="load-more-container" class="text-center mt-8 hidden button-animate">
+        <button id="load-more-btn" class="bg-blue-500 hover:bg-blue-600 text-white font-bold py-3 px-6 rounded-full shadow-md smooth-hover hover:scale-105 transition-all duration-300">
+          <i class="fas fa-plus-circle mr-2"></i>Lihat Lebih Banyak
+        </button>
+      </div>
+    </div>
+
+    <script>
+      // Preload gambar: Tunggu semua gambar ter-load sebelum sembunyikan loading screen
+      const images = document.querySelectorAll('img');
+      let loadedImages = 0;
+      const totalImages = images.length;
+
+      function imageLoaded() {
+        loadedImages++;
+        if (loadedImages === totalImages) {
+          setTimeout(() => {
+            document.getElementById('loading-screen').classList.add('hidden');
+            initLoadMore(); // Inisialisasi tombol lihat lebih banyak setelah loading selesai
+            initScrollAnimations(); // Inisialisasi animasi scroll
+          }, 500); // Delay kecil untuk efek smooth
+        }
+      }
+
+      images.forEach((img) => {
+        if (img.complete) {
+          imageLoaded();
+        } else {
+          img.addEventListener('load', imageLoaded);
+          img.addEventListener('error', imageLoaded); // Jika error, tetap hitung sebagai loaded
+        }
+      });
+
+      // Animasi scroll: Kartu muncul dengan fade-in dan slide-up saat masuk viewport
+      const observer = new IntersectionObserver(
+        (entries) => {
+          entries.forEach((entry) => {
+            if (entry.isIntersecting) {
+              entry.target.classList.add('card-visible');
+            }
+          });
+        },
+        { threshold: 0.1 }
+      );
+
+      // Ambil semua kartu dan observasi
+      const cards = document.querySelectorAll('.card-hidden');
+      cards.forEach((card) => observer.observe(card));
+
+      // Fungsi untuk mengelola tombol "Lihat Lebih Banyak"
+      function initLoadMore() {
+        const cardContainer = document.getElementById('card-container');
+        const cards = cardContainer.querySelectorAll('.bg-white');
+        const loadMoreContainer = document.getElementById('load-more-container');
+        const loadMoreBtn = document.getElementById('load-more-btn');
+
+        // Tampilkan hanya 6 kartu pertama
+        const totalCards = cards.length;
+        const cardsToShow = 6;
+        let currentlyShowing = cardsToShow;
+
+        if (totalCards > cardsToShow) {
+          // Sembunyikan kartu yang lebih dari 6
+          for (let i = cardsToShow; i < totalCards; i++) {
+            cards[i].classList.add('hidden-card');
+          }
+
+          // Tampilkan tombol lihat lebih banyak
+          loadMoreContainer.classList.remove('hidden');
+
+          // Tambahkan animasi untuk tombol
+          setTimeout(() => {
+            loadMoreContainer.classList.add('button-visible');
+          }, 300);
+
+          // Event listener untuk tombol lihat lebih banyak
+          loadMoreBtn.addEventListener('click', function () {
+            // Tampilkan 3 kartu berikutnya
+            for (let i = currentlyShowing; i < currentlyShowing + 3 && i < totalCards; i++) {
+              cards[i].classList.remove('hidden-card');
+              // Trigger animasi untuk kartu yang baru ditampilkan
+              setTimeout(() => {
+                cards[i].classList.add('card-visible');
+                cards[i].classList.add('scroll-visible');
+              }, 100);
+            }
+
+            currentlyShowing += 3;
+
+            // Sembunyikan tombol jika semua kartu sudah ditampilkan
+            if (currentlyShowing >= totalCards) {
+              loadMoreContainer.classList.add('hidden');
+            }
+          });
+        }
+      }
+
+      // Fungsi untuk inisialisasi animasi scroll
+      function initScrollAnimations() {
+        // Animasi untuk judul halaman
+        const title = document.querySelector('.title-animate');
+        if (title) {
+          setTimeout(() => {
+            title.classList.add('title-visible');
+          }, 300);
+        }
+
+        // Observer untuk elemen dengan animasi scroll
+        const scrollObserver = new IntersectionObserver(
+          (entries) => {
+            entries.forEach((entry) => {
+              if (entry.isIntersecting) {
+                entry.target.classList.add('scroll-visible');
+              } else {
+                // Opsional: Hapus animasi saat elemen keluar dari viewport
+                // entry.target.classList.remove('scroll-visible');
+              }
+            });
+          },
+          {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px',
+          }
+        );
+
+        // Observasi semua elemen dengan kelas animasi scroll
+        const scrollElements = document.querySelectorAll('.scroll-animate, .scroll-animate-left, .scroll-animate-right, .scroll-animate-zoom');
+        scrollElements.forEach((el) => {
+          scrollObserver.observe(el);
+        });
+
+        // Tambahkan efek parallax sederhana pada kartu saat scroll
+        window.addEventListener('scroll', () => {
+          const scrolled = window.pageYOffset;
+          const parallaxElements = document.querySelectorAll('.bg-white');
+
+          parallaxElements.forEach((el, index) => {
+            const rate = scrolled * -0.1;
+            // Berikan efek yang berbeda berdasarkan posisi kartu
+            if (index % 3 === 0) {
+              el.style.transform = `translateY(${rate}px)`;
+            } else if (index % 3 === 1) {
+              el.style.transform = `translateY(${rate * 0.7}px)`;
+            } else {
+              el.style.transform = `translateY(${rate * 0.4}px)`;
+            }
+          });
+        });
+      }
+    </script>
+  </body>
+</html>
