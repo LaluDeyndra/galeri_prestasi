@@ -311,3 +311,66 @@ function initScrollAnimations() {
   // Run once to position images correctly
   parallaxImages();
 }
+
+// Image Modal functionality
+function initImageModal() {
+  const modal = document.getElementById('image-modal');
+  const modalImage = document.getElementById('modal-image');
+  const modalClose = document.getElementById('modal-close');
+
+  // Get all card images
+  const cardImages = document.querySelectorAll('#card-container img');
+
+  cardImages.forEach((img) => {
+    // Add click listener to image wrapper
+    const wrapper = img.closest('div[class*="overflow-hidden"]') || img.parentElement;
+    if (wrapper) {
+      wrapper.style.cursor = 'pointer';
+      wrapper.addEventListener('click', (e) => {
+        // Don't trigger if clicking on links
+        if (e.target.closest('a')) return;
+
+        // Get the actual image source (handle data-src for lazy loaded images)
+        const src = img.src || img.dataset.src;
+        modalImage.src = src;
+        modalImage.alt = img.alt;
+
+        // Show modal
+        modal.classList.remove('hidden');
+        modal.style.display = 'flex';
+        document.body.style.overflow = 'hidden';
+      });
+    }
+  });
+
+  // Close modal on X button click
+  modalClose.addEventListener('click', (e) => {
+    e.stopPropagation();
+    modal.classList.add('hidden');
+    modal.style.display = 'none';
+    document.body.style.overflow = 'auto';
+  });
+
+  // Close modal on background click
+  modal.addEventListener('click', (e) => {
+    if (e.target === modal) {
+      modal.classList.add('hidden');
+      modal.style.display = 'none';
+      document.body.style.overflow = 'auto';
+    }
+  });
+
+  // Close modal on ESC key
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape' && !modal.classList.contains('hidden')) {
+      modal.classList.add('hidden');
+      modal.style.display = 'none';
+      document.body.style.overflow = 'auto';
+    }
+  });
+}
+
+// Initialize image modal after page load
+document.addEventListener('DOMContentLoaded', () => {
+  initImageModal();
+});

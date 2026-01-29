@@ -29,10 +29,28 @@
         <i class="fas fa-sun"></i>
       </button>
 
+      <!-- Image Modal -->
+      <div id="image-modal" class="fixed inset-0 bg-black bg-opacity-70 z-50 hidden flex items-center justify-center" style="display: none">
+        <div class="relative max-w-4xl max-h-full w-full h-full flex items-center justify-center p-4">
+          <button id="modal-close" class="absolute top-4 right-4 text-white hover:text-gray-300 z-60 bg-black/50 rounded-full w-10 h-10 flex items-center justify-center hover:bg-black/70 transition-all">
+            <i class="fas fa-times text-2xl"></i>
+          </button>
+          <img id="modal-image" src="" alt="Full view" class="max-w-full max-h-full object-contain rounded-lg shadow-2xl" />
+        </div>
+      </div>
+
       <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6" id="card-container">
         <!-- Kartu Siswa 1 -->
         <div class="bg-white rounded-lg shadow-md overflow-hidden hover:shadow-xl hover:scale-105 border border-gray-200 card-hidden smooth-hover scroll-animate-left delay-100">
-          <img src="assets/img/callista medali emas.jpeg" alt="Callista - Medali Emas" class="w-full h-48 object-cover smooth-hover hover:brightness-110 hover:scale-110" />
+          <div class="relative group cursor-pointer">
+            <img src="assets/img/callista medali emas.jpeg" alt="Callista - Medali Emas" class="w-full h-48 object-cover smooth-hover hover:brightness-110 hover:scale-110 transition-all" />
+            <div class="absolute inset-0 bg-black/0 group-hover:bg-black/30 transition-all flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity">
+              <div class="text-white text-center">
+                <i class="fas fa-search-plus text-3xl mb-2"></i>
+                <p class="text-sm font-semibold">Klik untuk lihat foto penuh</p>
+              </div>
+            </div>
+          </div>
           <div class="p-4">
             <h2 class="text-xl font-semibold text-gray-800 smooth-hover hover:text-blue-600">Callista</h2>
             <p class="text-gray-600 mt-2 smooth-hover hover:text-gray-800">Peraih Medali Emas. Prestasi gemilang dalam kompetisi akademik nasional.</p>
@@ -45,7 +63,15 @@
         </div>
         <!-- Kartu Siswa 2 -->
         <div class="bg-white rounded-lg shadow-md overflow-hidden hover:shadow-xl hover:scale-105 border border-gray-200 card-hidden smooth-hover scroll-animate delay-200">
-          <img src="assets/img/mathera medali emas.jpeg" alt="Mathera - Medali Emas" class="w-full h-48 object-cover smooth-hover hover:brightness-110 hover:scale-110" />
+          <div class="relative group cursor-pointer">
+            <img src="assets/img/mathera medali emas.jpeg" alt="Mathera - Medali Emas" class="w-full h-48 object-cover smooth-hover hover:brightness-110 hover:scale-110 transition-all" />
+            <div class="absolute inset-0 bg-black/0 group-hover:bg-black/30 transition-all flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity">
+              <div class="text-white text-center">
+                <i class="fas fa-search-plus text-3xl mb-2"></i>
+                <p class="text-sm font-semibold">Klik untuk lihat foto penuh</p>
+              </div>
+            </div>
+          </div>
           <div class="p-4">
             <h2 class="text-xl font-semibold text-gray-800 smooth-hover hover:text-blue-600">Mathera</h2>
             <p class="text-gray-600 mt-2 smooth-hover hover:text-gray-800">Pemenang Medali Emas. Prestasi luar biasa dalam bidang STEM dan sains.</p>
@@ -58,7 +84,15 @@
         </div>
         <!-- Kartu Siswa 3 -->
         <div class="bg-white rounded-lg shadow-md overflow-hidden hover:shadow-xl hover:scale-105 border border-gray-200 card-hidden smooth-hover scroll-animate-right delay-300">
-          <img src="assets/img/natasya medali emas.jpeg" alt="Natasya - Medali Emas" class="w-full h-48 object-cover smooth-hover hover:brightness-110 hover:scale-110" />
+          <div class="relative group cursor-pointer">
+            <img src="assets/img/natasya medali emas.jpeg" alt="Natasya - Medali Emas" class="w-full h-48 object-cover smooth-hover hover:brightness-110 hover:scale-110 transition-all" />
+            <div class="absolute inset-0 bg-black/0 group-hover:bg-black/30 transition-all flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity">
+              <div class="text-white text-center">
+                <i class="fas fa-search-plus text-3xl mb-2"></i>
+                <p class="text-sm font-semibold">Klik untuk lihat foto penuh</p>
+              </div>
+            </div>
+          </div>
           <div class="p-4">
             <h2 class="text-xl font-semibold text-gray-800 smooth-hover hover:text-blue-600">Natasya</h2>
             <p class="text-gray-600 mt-2 smooth-hover hover:text-gray-800">Peraih Medali Emas. Prestasi istimewa dalam lomba tingkat nasional.</p>
@@ -71,7 +105,15 @@
         </div>
         <!-- Kartu Siswa 4 -->
         <div class="bg-white rounded-lg shadow-md overflow-hidden hover:shadow-xl hover:scale-105 border border-gray-200 card-hidden smooth-hover scroll-animate-left delay-400">
-          <img src="assets/img/natasya juara 1.jpeg" alt="Natasya - Juara 1" class="w-full h-48 object-cover smooth-hover hover:brightness-110 hover:scale-110" />
+          <div class="relative group cursor-pointer">
+            <img src="assets/img/natasya juara 1.jpeg" alt="Natasya - Juara 1" class="w-full h-48 object-cover smooth-hover hover:brightness-110 hover:scale-110 transition-all" />
+            <div class="absolute inset-0 bg-black/0 group-hover:bg-black/30 transition-all flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity">
+              <div class="text-white text-center">
+                <i class="fas fa-search-plus text-3xl mb-2"></i>
+                <p class="text-sm font-semibold">Klik untuk lihat foto penuh</p>
+              </div>
+            </div>
+          </div>
           <div class="p-4">
             <h2 class="text-xl font-semibold text-gray-800 smooth-hover hover:text-blue-600">Natasya</h2>
             <p class="text-gray-600 mt-2 smooth-hover hover:text-gray-800">Juara 1 Kompetisi Bergengsi. Meraih posisi teratas dengan performa terbaik.</p>
@@ -84,7 +126,15 @@
         </div>
         <!-- Kartu Siswa 5 -->
         <div class="bg-white rounded-lg shadow-md overflow-hidden hover:shadow-xl hover:scale-105 border border-gray-200 card-hidden smooth-hover scroll-animate-zoom delay-500">
-          <img src="assets/img/natasya juara 2.jpeg" alt="Natasya - Juara 2" class="w-full h-48 object-cover smooth-hover hover:brightness-110 hover:scale-110" />
+          <div class="relative group cursor-pointer">
+            <img src="assets/img/natasya juara 2.jpeg" alt="Natasya - Juara 2" class="w-full h-48 object-cover smooth-hover hover:brightness-110 hover:scale-110 transition-all" />
+            <div class="absolute inset-0 bg-black/0 group-hover:bg-black/30 transition-all flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity">
+              <div class="text-white text-center">
+                <i class="fas fa-search-plus text-3xl mb-2"></i>
+                <p class="text-sm font-semibold">Klik untuk lihat foto penuh</p>
+              </div>
+            </div>
+          </div>
           <div class="p-4">
             <h2 class="text-xl font-semibold text-gray-800 smooth-hover hover:text-blue-600">Natasya</h2>
             <p class="text-gray-600 mt-2 smooth-hover hover:text-gray-800">Juara 2 dalam Kompetisi. Prestasi mengesankan di berbagai kategori lomba.</p>
@@ -97,7 +147,15 @@
         </div>
         <!-- Kartu Siswa 6 -->
         <div class="bg-white rounded-lg shadow-md overflow-hidden hover:shadow-xl hover:scale-105 border border-gray-200 card-hidden smooth-hover scroll-animate delay-100">
-          <img src="assets/img/sofya juara 2.jpeg" alt="Sofya - Juara 2" class="w-full h-48 object-cover smooth-hover hover:brightness-110 hover:scale-110" />
+          <div class="relative group cursor-pointer">
+            <img src="assets/img/sofya juara 2.jpeg" alt="Sofya - Juara 2" class="w-full h-48 object-cover smooth-hover hover:brightness-110 hover:scale-110 transition-all" />
+            <div class="absolute inset-0 bg-black/0 group-hover:bg-black/30 transition-all flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity">
+              <div class="text-white text-center">
+                <i class="fas fa-search-plus text-3xl mb-2"></i>
+                <p class="text-sm font-semibold">Klik untuk lihat foto penuh</p>
+              </div>
+            </div>
+          </div>
           <div class="p-4">
             <h2 class="text-xl font-semibold text-gray-800 smooth-hover hover:text-blue-600">Sofya</h2>
             <p class="text-gray-600 mt-2 smooth-hover hover:text-gray-800">Juara 2 Kompetisi Nasional. Prestasi cemerlang dalam ajang bergengsi.</p>
@@ -110,7 +168,15 @@
         </div>
         <!-- Kartu Siswa 7 (tersembunyi) -->
         <div class="bg-white rounded-lg shadow-md overflow-hidden hover:shadow-xl hover:scale-105 border border-gray-200 card-hidden smooth-hover hidden-card scroll-animate-left">
-          <img data-src="assets/img/irsyad juara 3.jpeg" alt="Irsyad - Juara 3" class="w-full h-48 object-cover smooth-hover hover:brightness-110 hover:scale-110" />
+          <div class="relative group cursor-pointer">
+            <img data-src="assets/img/irsyad juara 3.jpeg" alt="Irsyad - Juara 3" class="w-full h-48 object-cover smooth-hover hover:brightness-110 hover:scale-110 transition-all" />
+            <div class="absolute inset-0 bg-black/0 group-hover:bg-black/30 transition-all flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity">
+              <div class="text-white text-center">
+                <i class="fas fa-search-plus text-3xl mb-2"></i>
+                <p class="text-sm font-semibold">Klik untuk lihat foto penuh</p>
+              </div>
+            </div>
+          </div>
           <div class="p-4">
             <h2 class="text-xl font-semibold text-gray-800 smooth-hover hover:text-blue-600">Irsyad</h2>
             <p class="text-gray-600 mt-2 smooth-hover hover:text-gray-800">Juara 3 Kompetisi Bergengsi. Prestasi yang membanggakan di tingkat nasional.</p>
@@ -123,7 +189,15 @@
         </div>
         <!-- Kartu Siswa 8 (tersembunyi) -->
         <div class="bg-white rounded-lg shadow-md overflow-hidden hover:shadow-xl hover:scale-105 border border-gray-200 card-hidden smooth-hover hidden-card scroll-animate-right">
-          <img data-src="assets/img/tania juara 3.jpeg" alt="Tania - Juara 3" class="w-full h-48 object-cover smooth-hover hover:brightness-110 hover:scale-110" />
+          <div class="relative group cursor-pointer">
+            <img data-src="assets/img/tania juara 3.jpeg" alt="Tania - Juara 3" class="w-full h-48 object-cover smooth-hover hover:brightness-110 hover:scale-110 transition-all" />
+            <div class="absolute inset-0 bg-black/0 group-hover:bg-black/30 transition-all flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity">
+              <div class="text-white text-center">
+                <i class="fas fa-search-plus text-3xl mb-2"></i>
+                <p class="text-sm font-semibold">Klik untuk lihat foto penuh</p>
+              </div>
+            </div>
+          </div>
           <div class="p-4">
             <h2 class="text-xl font-semibold text-gray-800 smooth-hover hover:text-blue-600">Tania</h2>
             <p class="text-gray-600 mt-2 smooth-hover hover:text-gray-800">Juara 3 dalam Kompetisi. Prestasi demi prestasi terus diraih dengan konsisten.</p>
@@ -136,7 +210,15 @@
         </div>
         <!-- Kartu Siswa 9 (tersembunyi) -->
         <div class="bg-white rounded-lg shadow-md overflow-hidden hover:shadow-xl hover:scale-105 border border-gray-200 card-hidden smooth-hover hidden-card scroll-animate-left delay-100">
-          <img data-src="assets/img/tegar bima juara 3.jpeg" alt="Tegar Bima - Juara 3" class="w-full h-48 object-cover smooth-hover hover:brightness-110 hover:scale-110" />
+          <div class="relative group cursor-pointer">
+            <img data-src="assets/img/tegar bima juara 3.jpeg" alt="Tegar Bima - Juara 3" class="w-full h-48 object-cover smooth-hover hover:brightness-110 hover:scale-110 transition-all" />
+            <div class="absolute inset-0 bg-black/0 group-hover:bg-black/30 transition-all flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity">
+              <div class="text-white text-center">
+                <i class="fas fa-search-plus text-3xl mb-2"></i>
+                <p class="text-sm font-semibold">Klik untuk lihat foto penuh</p>
+              </div>
+            </div>
+          </div>
           <div class="p-4">
             <h2 class="text-xl font-semibold text-gray-800 smooth-hover hover:text-blue-600">Tegar Bima</h2>
             <p class="text-gray-600 mt-2 smooth-hover hover:text-gray-800">Juara 3 Kompetisi Nasional. Menunjukkan kemampuan luar biasa di ajang perlombaan.</p>
@@ -149,7 +231,15 @@
         </div>
         <!-- Kartu Siswa 10 (tersembunyi) -->
         <div class="bg-white rounded-lg shadow-md overflow-hidden hover:shadow-xl hover:scale-105 border border-gray-200 card-hidden smooth-hover hidden-card scroll-animate-right delay-200">
-          <img data-src="assets/img/aksata creative's juara 1.jpeg" alt="Aksata Creative - Juara 1" class="w-full h-48 object-cover smooth-hover hover:brightness-110 hover:scale-110" />
+          <div class="relative group cursor-pointer">
+            <img data-src="assets/img/aksata creative's juara 1.jpeg" alt="Aksata Creative - Juara 1" class="w-full h-48 object-cover smooth-hover hover:brightness-110 hover:scale-110 transition-all" />
+            <div class="absolute inset-0 bg-black/0 group-hover:bg-black/30 transition-all flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity">
+              <div class="text-white text-center">
+                <i class="fas fa-search-plus text-3xl mb-2"></i>
+                <p class="text-sm font-semibold">Klik untuk lihat foto penuh</p>
+              </div>
+            </div>
+          </div>
           <div class="p-4">
             <h2 class="text-xl font-semibold text-gray-800 smooth-hover hover:text-blue-600">Aksata Creative</h2>
             <p class="text-gray-600 mt-2 smooth-hover hover:text-gray-800">Juara 1 Kompetisi Seni Kreatif. Karya inovatif yang menginspirasi banyak orang.</p>
@@ -162,7 +252,15 @@
         </div>
         <!-- Kartu Siswa 11 (tersembunyi) -->
         <div class="bg-white rounded-lg shadow-md overflow-hidden hover:shadow-xl hover:scale-105 border border-gray-200 card-hidden smooth-hover hidden-card scroll-animate-zoom delay-300">
-          <img data-src="assets/img/masuk ke paskibraka malang.jpeg" alt="Paskibraka Malang" class="w-full h-48 object-cover smooth-hover hover:brightness-110 hover:scale-110" />
+          <div class="relative group cursor-pointer">
+            <img data-src="assets/img/masuk ke paskibraka malang.jpeg" alt="Paskibraka Malang" class="w-full h-48 object-cover smooth-hover hover:brightness-110 hover:scale-110 transition-all" />
+            <div class="absolute inset-0 bg-black/0 group-hover:bg-black/30 transition-all flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity">
+              <div class="text-white text-center">
+                <i class="fas fa-search-plus text-3xl mb-2"></i>
+                <p class="text-sm font-semibold">Klik untuk lihat foto penuh</p>
+              </div>
+            </div>
+          </div>
           <div class="p-4">
             <h2 class="text-xl font-semibold text-gray-800 smooth-hover hover:text-blue-600">Tim Paskibraka</h2>
             <p class="text-gray-600 mt-2 smooth-hover hover:text-gray-800">Terpilih menjadi Paskibraka Malang. Kehormatan besar mewakili daerah dengan bangga.</p>
@@ -175,7 +273,15 @@
         </div>
         <!-- Kartu Siswa 12 (tersembunyi) -->
         <div class="bg-white rounded-lg shadow-md overflow-hidden hover:shadow-xl hover:scale-105 border border-gray-200 card-hidden smooth-hover hidden-card scroll-animate-left delay-400">
-          <img data-src="assets/img/tim lkbb panenama champion.jpeg" alt="Tim LKBB Panenama Champion" class="w-full h-48 object-cover smooth-hover hover:brightness-110 hover:scale-110" />
+          <div class="relative group cursor-pointer">
+            <img data-src="assets/img/tim lkbb panenama champion.jpeg" alt="Tim LKBB Panenama Champion" class="w-full h-48 object-cover smooth-hover hover:brightness-110 hover:scale-110 transition-all" />
+            <div class="absolute inset-0 bg-black/0 group-hover:bg-black/30 transition-all flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity">
+              <div class="text-white text-center">
+                <i class="fas fa-search-plus text-3xl mb-2"></i>
+                <p class="text-sm font-semibold">Klik untuk lihat foto penuh</p>
+              </div>
+            </div>
+          </div>
           <div class="p-4">
             <h2 class="text-xl font-semibold text-gray-800 smooth-hover hover:text-blue-600">Tim LKBB</h2>
             <p class="text-gray-600 mt-2 smooth-hover hover:text-gray-800">Panenama Champion LKBB. Juara umum dalam kompetisi LKBB bergengsi.</p>
@@ -188,7 +294,15 @@
         </div>
         <!-- Kartu Siswa 13 (tersembunyi) -->
         <div class="bg-white rounded-lg shadow-md overflow-hidden hover:shadow-xl hover:scale-105 border border-gray-200 card-hidden smooth-hover hidden-card scroll-animate-right delay-500">
-          <img data-src="assets/img/winton.jpeg" alt="Winton" class="w-full h-48 object-cover smooth-hover hover:brightness-110 hover:scale-110" />
+          <div class="relative group cursor-pointer">
+            <img data-src="assets/img/winton.jpeg" alt="Winton" class="w-full h-48 object-cover smooth-hover hover:brightness-110 hover:scale-110 transition-all" />
+            <div class="absolute inset-0 bg-black/0 group-hover:bg-black/30 transition-all flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity">
+              <div class="text-white text-center">
+                <i class="fas fa-search-plus text-3xl mb-2"></i>
+                <p class="text-sm font-semibold">Klik untuk lihat foto penuh</p>
+              </div>
+            </div>
+          </div>
           <div class="p-4">
             <h2 class="text-xl font-semibold text-gray-800 smooth-hover hover:text-blue-600">Winton</h2>
             <p class="text-gray-600 mt-2 smooth-hover hover:text-gray-800">Prestasi gemilang dalam berbagai kompetisi. Dedikasi dan kerja keras selalu menghasilkan.</p>
