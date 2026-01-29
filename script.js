@@ -39,7 +39,7 @@ const observer = new IntersectionObserver(
       }
     });
   },
-  { threshold: 0.1 }
+  { threshold: 0.1 },
 );
 
 // Ambil semua kartu dan observasi
@@ -114,10 +114,13 @@ function initLoadMore() {
       // Tampilkan kartu setelah gambar siap
       loadBatch.forEach((card, idx) => {
         card.classList.remove('hidden-card');
-        setTimeout(() => {
-          card.classList.add('card-visible');
-          card.classList.add('scroll-visible');
-        }, 260 + idx * 180);
+        setTimeout(
+          () => {
+            card.classList.add('card-visible');
+            card.classList.add('scroll-visible');
+          },
+          260 + idx * 180,
+        );
       });
 
       currentlyShowing += loadBatch.length;
@@ -160,7 +163,7 @@ function initScrollAnimations() {
     {
       threshold: 0.1,
       rootMargin: '0px 0px -50px 0px',
-    }
+    },
   );
 
   // Observasi semua elemen dengan kelas animasi scroll
@@ -229,7 +232,7 @@ function initScrollAnimations() {
         }
       });
     },
-    { threshold: 0.12 }
+    { threshold: 0.12 },
   );
 
   // Observe all cards for enhanced reveal and add overlay elements
@@ -307,204 +310,4 @@ function initScrollAnimations() {
 
   // Run once to position images correctly
   parallaxImages();
-}
-// Popup Trophy
-const trophyBtn = document.getElementById('trophy-toggle');
-const popup = document.getElementById('congrats-popup');
-const closePopup = document.getElementById('close-popup');
-const fireworks = document.getElementById('fireworks');
-const trophyContainer = document.getElementById('trophy-container');
-
-function showPopup() {
-  if (!popup) return;
-  // populate popup badges
-  populateBadges();
-
-  popup.classList.remove('hidden');
-  popup.classList.add('flex');
-  // small reflow then add entrance class (in case of repeated opening)
-  requestAnimationFrame(() => {
-    const card = popup.querySelector('.popup-card');
-    if (card) {
-      card.classList.remove('popup-enter');
-      void card.offsetWidth;
-      card.classList.add('popup-enter');
-    }
-  });
-
-  playCheer();
-  launchFireworks();
-  launchConfetti();
-  launchSparklers();
-}
-
-function hidePopup() {
-  if (!popup) return;
-  popup.classList.add('hidden');
-  popup.classList.remove('flex');
-  if (fireworks) fireworks.innerHTML = '';
-  // remove confetti
-  if (trophyContainer) trophyContainer.innerHTML = '';
-}
-
-// close handlers
-trophyBtn && trophyBtn.addEventListener('click', showPopup);
-closePopup && closePopup.addEventListener('click', hidePopup);
-// close when clicking on overlay outside card
-popup &&
-  popup.addEventListener('click', (e) => {
-    const card = popup.querySelector('.popup-card');
-    if (e.target === popup) hidePopup();
-    if (card && !card.contains(e.target) && e.target !== card) hidePopup();
-  });
-// close on ESC
-window.addEventListener('keydown', (e) => {
-  if (e.key === 'Escape') hidePopup();
-});
-
-function launchFireworks() {
-  if (!fireworks) return;
-  fireworks.innerHTML = '';
-  for (let i = 0; i < 18; i++) {
-    const fw = document.createElement('div');
-    fw.className = 'firework';
-    fw.style.left = Math.random() * 85 + 7 + '%';
-    fw.style.bottom = Math.random() * 8 + 'px';
-    fw.style.background = `radial-gradient(circle, hsl(${Math.random() * 360},90%,60%) 60%, #FFD700 100%)`;
-    // random delay so they don't all explode same time
-    fw.style.animationDelay = Math.random() * 300 + 'ms';
-    fireworks.appendChild(fw);
-    setTimeout(() => fw.remove(), 1400 + Math.random() * 400);
-  }
-}
-
-// Confetti across the page attached to #trophy-container
-function launchConfetti() {
-  if (!trophyContainer) return;
-  const colors = ['#ef4444', '#f97316', '#f59e0b', '#10b981', '#3b82f6', '#8b5cf6', '#ec4899'];
-  const count = 40;
-  for (let i = 0; i < count; i++) {
-    const c = document.createElement('div');
-    c.className = 'confetti';
-    c.style.left = Math.random() * 100 + '%';
-    c.style.top = -(Math.random() * 12 + 2) + 'vh';
-    c.style.background = colors[Math.floor(Math.random() * colors.length)];
-    // random size & rotation duration
-    c.style.width = 8 + Math.random() * 8 + 'px';
-    c.style.height = 10 + Math.random() * 10 + 'px';
-    c.style.setProperty('--dur', 1600 + Math.random() * 1600 + 'ms');
-    c.style.transform = `rotate(${Math.random() * 360}deg)`;
-    trophyContainer.appendChild(c);
-    // remove after animation
-    setTimeout(() => c.remove(), 3000 + Math.random() * 1200);
-  }
-  // Emoji confetti (small emoji rising near popup)
-  const emojis = ['🎉', '👏', '🏆', '✨', '🌟'];
-  const emojiCount = 10;
-  for (let i = 0; i < emojiCount; i++) {
-    const e = document.createElement('div');
-    e.className = 'emoji-confetti';
-    e.textContent = emojis[Math.floor(Math.random() * emojis.length)];
-    // position near center top area
-    e.style.left = 30 + Math.random() * 40 + '%';
-    e.style.bottom = 40 + Math.random() * 30 + 'px';
-    e.style.fontSize = 16 + Math.random() * 18 + 'px';
-    e.style.animationDelay = Math.random() * 300 + 'ms';
-    trophyContainer.appendChild(e);
-    setTimeout(() => e.remove(), 2200 + Math.random() * 800);
-  }
-}
-
-// Populate popup with attractive badges (motivation words)
-function populateBadges() {
-  const container = document.getElementById('popup-badges');
-  if (!container) return;
-  container.innerHTML = '';
-  const phrases = ['Hebat!', 'Inspiratif', 'Juara!', 'Bangga!', 'Pantang Menyerah', 'Penggerak', 'Berkarya', 'Pemimpin', 'Bintang', 'Semangat!'];
-  phrases.forEach((p, i) => {
-    const el = document.createElement('div');
-    el.className = 'badge';
-    el.textContent = p;
-    // slight staggered entrance
-    el.style.transitionDelay = i * 40 + 'ms';
-    container.appendChild(el);
-  });
-}
-
-// Short synthesized cheer sound using Web Audio API (no external file)
-function playCheer() {
-  try {
-    const AudioCtx = window.AudioContext || window.webkitAudioContext;
-    if (!AudioCtx) return;
-    const ctx = new AudioCtx();
-    const now = ctx.currentTime;
-
-    // short chord (two oscillators)
-    const o1 = ctx.createOscillator();
-    const o2 = ctx.createOscillator();
-    const g = ctx.createGain();
-    g.gain.setValueAtTime(0.0001, now);
-    g.gain.exponentialRampToValueAtTime(0.18, now + 0.02);
-    g.gain.exponentialRampToValueAtTime(0.001, now + 0.9);
-
-    o1.frequency.value = 880; // A5
-    o2.frequency.value = 1100; // C#6
-    o1.type = 'sine';
-    o2.type = 'sine';
-
-    o1.connect(g);
-    o2.connect(g);
-
-    // a bit of noise for crowd feel
-    const bufferSize = ctx.sampleRate * 0.4;
-    const noiseBuffer = ctx.createBuffer(1, bufferSize, ctx.sampleRate);
-    const data = noiseBuffer.getChannelData(0);
-    for (let i = 0; i < bufferSize; i++) data[i] = (Math.random() * 2 - 1) * 0.25;
-    const noise = ctx.createBufferSource();
-    noise.buffer = noiseBuffer;
-    const noiseFilter = ctx.createBiquadFilter();
-    noiseFilter.type = 'highpass';
-    noiseFilter.frequency.value = 800;
-    noise.connect(noiseFilter);
-    noiseFilter.connect(g);
-
-    g.connect(ctx.destination);
-
-    o1.start(now);
-    o2.start(now + 0.02);
-    noise.start(now);
-
-    o1.stop(now + 0.85);
-    o2.stop(now + 0.85);
-    noise.stop(now + 0.85);
-
-    // close context after sound finished
-    setTimeout(() => {
-      if (ctx.close) ctx.close();
-    }, 1200);
-  } catch (e) {
-    // ignore if audio not available
-    console.warn('Audio unavailable', e);
-  }
-}
-
-// small sparklers near the big trophy in popup
-function launchSparklers() {
-  const popup = document.getElementById('congrats-popup');
-  if (!popup) return;
-  const card = popup.querySelector('.popup-card');
-  if (!card) return;
-  // remove old sparks
-  const old = card.querySelectorAll('.spark');
-  old.forEach((n) => n.remove());
-  const rect = card.getBoundingClientRect();
-  for (let i = 0; i < 12; i++) {
-    const s = document.createElement('div');
-    s.className = 'spark';
-    s.style.background = `hsl(${Math.random() * 60 + 40},90%,60%)`;
-    s.style.left = 40 + Math.random() * 20 + '%';
-    s.style.bottom = 40 + Math.random() * 10 + 'px';
-    card.appendChild(s);
-    setTimeout(() => s.remove(), 900 + Math.random() * 400);
-  }
 }
